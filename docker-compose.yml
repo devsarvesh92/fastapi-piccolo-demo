@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres-polestar-service
+    hostname: postgres-polestar-service
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+    environment:
+      POSTGRES_DB: "test_polestar_db"
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "P@ssw0rd"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    command: [ "postgres", "-c", "log_statement=all", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off" ]
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:alpine
+    container_name: redis-polestar-service
+    hostname: redis-polestar-service
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  citests:
+
+networks:
+  default:

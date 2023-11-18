@@ -9,3 +9,11 @@ run-test: # Run specific marker tests
 migrations: local-setup # Create new db migrations and execute them
 	@pdm run piccolo migrations new polestar --auto;
 	@pdm run migrate;
+
+setup:
+	$(call setup, "Setting up...")
+
+define setup
+	docker-compose -f docker-compose.yml up -d --build --force-recreate --remove-orphans
+    @docker system prune -f --volumes
+endef
