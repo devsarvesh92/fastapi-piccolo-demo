@@ -16,6 +16,7 @@ dependencies = [
     "pydantic>=2.5.1",
     "gunicorn>=21.2.0",
     "uvicorn>=0.24.0.post1",
+    "httpx>=0.25.1",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -24,3 +25,23 @@ license = {text = "MIT"}
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+
+[tool.pytest]
+[tool.pytest.ini_options]
+log_cli = 1
+log_cli_level = "WARNING"
+log_auto_indent = true
+asyncio_mode = "auto"
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--ignore=deps,__pypackages__",
+    "--cov=.",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+testpaths = ["tests"]
+markers = [
+    "ships: Run tests for ships end point",
+]

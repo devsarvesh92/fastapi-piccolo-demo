@@ -5,12 +5,15 @@ from contextlib import asynccontextmanager
 import logging
 from core.api.application import app
 from core.api.routes.health_check import ht
+from core.api.routes.ships import create_ship, get_ships
 from piccolo_conf import DB
 from settings import ENVSETTINGS
 
 LOGGER = logging.getLogger(name=__name__)
 
 LOGGER.info(f" Health check: {ht}")
+LOGGER.info(f" Get ships: {get_ships}")
+LOGGER.info(f" Get ships: {create_ship}")
 
 
 ################################################################################
