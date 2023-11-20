@@ -20,7 +20,7 @@ define setup
 endef
 
 local-setup: setup migrations
-	echo "Done with localsetup"
+	@echo "Done with localsetup"
 
 migrations:
 	@sleep 5

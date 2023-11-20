@@ -13,9 +13,7 @@ class BaseModel(PydanticBaseModel):
         arbitrary_types_allowed = True
         extras = Extra.forbid
         json_encoders = {
-            datetime.datetime: lambda val: val.strftime(
-                Constants.EVENT_TIMESTAMP_FORMAT
-            ),
+            datetime.datetime: lambda val: val.strftime("%Y-%m-%d %H:%M:%S"),
             uuid.UUID: str,
         }
 
@@ -27,3 +25,9 @@ class ShipInformation(BaseModel):
 
     name: str
     imo_number: int
+
+
+class ShipPosition(ShipInformation):
+    latitude: float
+    longitude: float
+    reported_at: datetime.datetime

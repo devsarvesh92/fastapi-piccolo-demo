@@ -8,7 +8,7 @@ from core.db.models.ship import Ship
 class ShipPositionHistory(Table):
     """Represents ship position history"""
 
-    imo_number = columns.ForeignKey(references=Ship)
+    ship = columns.ForeignKey(references=Ship)
     reported_at: Timestamptz = columns.Timestamptz(null=False, index=True)
     latitude: Numeric = columns.Numeric(
         digits=(16, 13),
