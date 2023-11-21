@@ -52,7 +52,7 @@ async def test_get_ship_positions(clean_db, create_ship_positions):
         app=app, follow_redirects=True, base_url="http://localhost:8000"
     ) as client:
         resp = await client.post(
-            Constants.GET_SHIP_POSITIONS.format(imo="9632179"),
+            Constants.SHIP_POSITIONS.format(imo="9632179"),
             headers={},
             params={},
         )

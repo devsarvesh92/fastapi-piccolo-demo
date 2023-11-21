@@ -1,5 +1,6 @@
 """Ship module"""
 
+import datetime
 from http import HTTPStatus
 from typing import Any
 
@@ -55,8 +56,8 @@ async def create_ship(ship_info: ShipInformation) -> None:
     ).on_conflict(action="DO NOTHING")
 
 
-@app.post(
-    path=Constants.GET_SHIP_POSITIONS,
+@app.get(
+    path=Constants.SHIP_POSITIONS,
     status_code=HTTPStatus.OK,
     description="Get all positions sorted by latest timestamp",
     tags=["polestar"],

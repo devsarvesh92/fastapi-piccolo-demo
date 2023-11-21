@@ -31,3 +31,9 @@ class ShipPosition(ShipInformation):
     latitude: float
     longitude: float
     reported_at: datetime.datetime
+
+
+class ShipPositionDetails:
+    latitude: float
+    longitude: float
+    reported_at: datetime.datetime
