@@ -1,14 +1,16 @@
 from piccolo.conf.apps import AppRegistry
 from piccolo.engine.postgres import PostgresEngine
 
+from settings import ENVSETTINGS
+
 
 DB = PostgresEngine(
     config={
-        "database": "test_polestar_db",
-        "user": "test",
-        "password": "P@ssw0rd",
-        "host": "localhost",
-        "port": 5432,
+        "database": ENVSETTINGS.database_name,
+        "user": ENVSETTINGS.database_user,
+        "password": ENVSETTINGS.database_password,
+        "host": ENVSETTINGS.database_host,
+        "port": ENVSETTINGS.database_port,
     }
 )
 

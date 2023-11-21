@@ -16,14 +16,34 @@ services:
     command: [ "postgres", "-c", "log_statement=all", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off" ]
     ports:
       - "5432:5432"
+    networks:
+      - default
 
-  redis:
-    image: redis:alpine
-    container_name: redis-polestar-service
-    hostname: redis-polestar-service
-    restart: unless-stopped
+  service:
+    container_name: polestar
+    hostname: polestar
+    image: polestar
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ENV: "test"
+
+    volumes:
+      - "/tmp:/tmp"
+
     ports:
-      - "6379:6379"
+      - "8000:8000"
+
+    depends_on:
+      - db
+    
+    networks:
+      - default
+
+
 
 volumes:
   citests:

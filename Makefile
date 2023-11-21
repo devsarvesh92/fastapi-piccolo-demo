@@ -19,14 +19,27 @@ define setup
 	@docker system prune -f --volumes
 endef
 
-local-setup: setup migrations
+local-setup: teardown setup migrations ingest
 	@echo "Done with localsetup"
 
 migrations:
 	@sleep 5
-	@pdm run piccolo migrations new polestar --auto;
-	@pdm run piccolo migrations forwards polestar all --trace;
+	@docker exec polestar pdm run piccolo migrations new polestar --auto;
+	@docker exec polestar pdm run piccolo migrations forwards polestar all --trace;
 
-ingest: local-setup
-	@pdm run python ./data/data_ingestion.py
+ingest:
+	@docker exec polestar pdm run python data_ingestion.py
 
+
+install:
+	@pdm install --no-self;
+
+
+define teardown
+	@docker-compose -f docker-compose.yml rm -f -v -s
+	@docker system prune -f --volumes
+	@rm -rf citests .coverage .pytest_cache htmlcov
+endef
+
+teardown: # Teardown test resources
+	$(call teardown, "Tearing down...")

@@ -1,15 +1,20 @@
 """This module defines test environment settings."""
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class ENVSETTINGS(BaseSettings):
+class Settings(BaseSettings):
     """Defines basic env vars for test environment."""
 
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+
     # Database
-    database_name: str | None = "testdb"
-    database_host: str | None = "localhost"
-    database_port: int | None = 5432
-    database_user: str | None = "test"
-    database_password: str | None = "P@ssw0rd"
-    db_connection_pool_size: int | None = 10
+    database_name: str
+    database_host: str
+    database_port: int
+    database_user: str
+    database_password: str
+    db_connection_pool_size: int = 10
+
+
+ENVSETTINGS = Settings()

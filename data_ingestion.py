@@ -3,7 +3,6 @@
 
 import datetime
 import logging
-from typing import Any
 from asyncpg import UniqueViolationError
 import pandas as pd
 from core.db.models.ship import Ship
