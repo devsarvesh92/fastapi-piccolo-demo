@@ -12,6 +12,7 @@ setup:
 	$(call setup, "Setting up...")
 
 define setup
+	cp .env.template .env
 	docker-compose -f docker-compose.yml up -d --build --force-recreate --remove-orphans
 	@docker system prune -f --volumes
 endef
