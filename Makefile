@@ -11,15 +11,12 @@ test: local-setup
 setup:
 	$(call setup, "Setting up...")
 
-start-web:
-	@pdm run gunicorn --config gunicorn.conf.py server:app
-
 define setup
 	docker-compose -f docker-compose.yml up -d --build --force-recreate --remove-orphans
 	@docker system prune -f --volumes
 endef
 
-local-setup: teardown setup migrations ingest
+local-setup: teardown setup migrations
 	@echo "Done with localsetup"
 
 migrations:

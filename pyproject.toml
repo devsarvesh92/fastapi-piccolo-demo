@@ -45,3 +45,8 @@ testpaths = ["tests"]
 markers = [
     "ships: Run tests for ships end point",
 ]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest-asyncio==0.20.3",
+]

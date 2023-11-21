@@ -17,6 +17,7 @@ def create_ship():
 @pytest.fixture(autouse=True)
 def clean_db():
     Ship.delete(force=True).run_sync()
+    ShipPositionHistory.delete(force=True).run_sync()
 
 
 @pytest.fixture
