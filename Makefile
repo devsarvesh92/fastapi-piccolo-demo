@@ -26,3 +26,7 @@ migrations:
 	@sleep 5
 	@pdm run piccolo migrations new polestar --auto;
 	@pdm run piccolo migrations forwards polestar all --trace;
+
+ingest: local-setup
+	@pdm run python ./data/data_ingestion.py
+
